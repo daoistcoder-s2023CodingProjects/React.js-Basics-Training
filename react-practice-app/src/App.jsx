@@ -79,9 +79,10 @@ export const UseEffectComp = () => {
         axios
             .get("https://api.es-dictionary.com/api/random")
             .then((response) => {
-                const data = response.data.word;
-                const message = `${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}. `;
-                setData(message);
+                const  data  = response.data.word;
+                const { word, part_of_speech, pronunciation, image_url } = data;
+                const message = `${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}.`;
+                setData({ word, part_of_speech, pronunciation, image_url });
                 console.log("request initiated: ", message);
             });
     }, [count]);
@@ -90,7 +91,8 @@ export const UseEffectComp = () => {
         <div>
             Hello World
             <h1>{count}</h1>
-            <h2>{data}</h2>
+            <img src={data.image_url} alt={`${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}.`} />
+            <h2>{`${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}.`}</h2>
             <button
                 onClick={() => {
                     setCount(count + 1);
