@@ -79,7 +79,7 @@ export const UseEffectComp = () => {
         axios
             .get("https://api.es-dictionary.com/api/random")
             .then((response) => {
-                const  data  = response.data.word;
+                const data = response.data.word;
                 const { word, part_of_speech, pronunciation, image_url } = data;
                 const message = `${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}.`;
                 setData({ word, part_of_speech, pronunciation, image_url });
@@ -91,7 +91,15 @@ export const UseEffectComp = () => {
         <div>
             Hello World
             <h1>{count}</h1>
-            <img style={{maxHeight: "200px", width: "350px", objectFit: "cover"}} src={data.image_url} alt={`${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}.`} />
+            <img
+                style={{
+                    maxHeight: "200px",
+                    width: "350px",
+                    objectFit: "cover",
+                }}
+                src={data.image_url}
+                alt={`${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}.`}
+            />
             <h2>{`${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}.`}</h2>
             <button
                 onClick={() => {
@@ -100,6 +108,33 @@ export const UseEffectComp = () => {
             >
                 Click
             </button>
+        </div>
+    );
+};
+
+export const RefComp = () => {
+    const inputRef = React.useRef(null);
+    const onClick = () => {
+        //usecase in forms
+        inputRef.current.focus();
+        console.log(inputRef.current.value);
+        inputRef.current.value = "";
+        
+    };
+    return (
+        <div>
+            <h1>Jerome</h1>
+            <input
+                style={{
+                    lineHeight: "42px",
+                    borderRadius: "10px",
+                    marginRight: "0.5rem",
+                }}
+                type="text"
+                placeholder="Ex..."
+                ref={inputRef}
+            />
+            <button onClick={onClick}>Change Name</button>
         </div>
     );
 };
@@ -121,7 +156,7 @@ export default function App() {
       <InputBoxComp />  
       <ReducerComp />*/}
 
-            <UseEffectComp />
+            <RefComp />
         </div>
     );
 }
