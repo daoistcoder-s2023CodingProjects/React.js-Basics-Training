@@ -91,7 +91,7 @@ export const UseEffectComp = () => {
         <div>
             Hello World
             <h1>{count}</h1>
-            <img src={data.image_url} alt={`${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}.`} />
+            <img style={{maxHeight: "200px", width: "350px", objectFit: "cover"}} src={data.image_url} alt={`${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}.`} />
             <h2>{`${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}.`}</h2>
             <button
                 onClick={() => {
