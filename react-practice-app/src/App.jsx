@@ -79,7 +79,8 @@ export const UseEffectComp = () => {
         axios
             .get("https://api.es-dictionary.com/api/random")
             .then((response) => {
-                const message = `${response.data.word.word} is a ${response.data.word.part_of_speech} pronounced as ${response.data.word.pronunciation}. `;
+                const data = response.data.word;
+                const message = `${data.word} is a ${data.part_of_speech} pronounced as ${data.pronunciation}. `;
                 setData(message);
                 console.log("request initiated: ", message);
             });
