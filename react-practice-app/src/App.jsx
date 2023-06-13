@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 import axios from "axios";
@@ -119,7 +119,6 @@ export const RefComp = () => {
         inputRef.current.focus();
         console.log(inputRef.current.value);
         inputRef.current.value = "";
-        
     };
     return (
         <div>
@@ -135,6 +134,37 @@ export const RefComp = () => {
                 ref={inputRef}
             />
             <button onClick={onClick}>Change Name</button>
+        </div>
+    );
+};
+
+export const UseLayoutComp = () => {
+    const inputRef = React.useRef(null);
+
+    React.useLayoutEffect(() => {
+        console.log("UseLayoutEffect: ", inputRef.current.value);
+    }, []);
+
+    React.useEffect(() => {
+        inputRef.current.value = "HELLO";
+        console.log("UseEffect: ", inputRef.current.value);
+    }, []);
+
+    return (
+        <div>
+            <input
+                style={{
+                    lineHeight: "42px",
+                    borderRadius: "10px",
+                    marginRight: "0.5rem",
+                    width: "400px",
+                }}
+                type="text"
+                value={"JEROME"}
+                placeholder="Ex..."
+                readOnly
+                ref={inputRef}
+            />
         </div>
     );
 };
@@ -156,7 +186,7 @@ export default function App() {
       <InputBoxComp />  
       <ReducerComp />*/}
 
-            <RefComp />
+            <UseLayoutComp />
         </div>
     );
 }
