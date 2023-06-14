@@ -169,6 +169,49 @@ export const UseLayoutComp = () => {
     );
 };
 
+export const ButtonChild = React.forwardRef((props, ref) => {
+    const [toggle, setToggle] = React.useState(null);
+
+    React.useImperativeHandle(ref, () => ({
+        alterToggle() {
+            setToggle(!toggle);      
+        },
+    }));
+    return (
+        <>
+            <button
+                onClick={() => {
+                    setToggle(!toggle);
+                    console.log("Triggered toggle from Child");
+                }}
+            >
+                Button from Child
+            </button>
+            {toggle && <h2>Toggle Text</h2>}
+        </>
+    );
+});
+
+export const ImperativeHandle = () => {
+    const buttonRef = React.useRef(null);
+    return (
+        <div
+            style={{
+                display: "flex",
+                flexFlow: "column",
+                gap: "0.5rem",
+                padding: "1rem",
+            }}
+            onClick={() => {
+                buttonRef.current.alterToggle();
+            }}
+        >
+            <button>Button from Parent</button>
+            <ButtonChild ref={buttonRef} />
+        </div>
+    );
+};
+
 export default function App() {
     return (
         <div
@@ -182,11 +225,7 @@ export default function App() {
                 textAlign: "center",
             }}
         >
-            {/* <CounterComp />
-      <InputBoxComp />  
-      <ReducerComp />*/}
-
-            <UseLayoutComp />
+            <ImperativeHandle />
         </div>
     );
 }
