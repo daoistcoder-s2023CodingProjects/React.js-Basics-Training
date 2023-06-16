@@ -213,7 +213,9 @@ export const ImperativeHandle = () => {
 };
 
 //ContextComponent Child
-export const Login = ({ setUsername }) => {
+export const Login = () => {
+    const { setUsername } = React.useContext(UserContext);
+
     return (
         <>
             <input
@@ -235,7 +237,9 @@ export const Login = ({ setUsername }) => {
     );
 };
 
-export const User = ({ username }) => {
+export const User = () => {
+    const { username } = React.useContext(UserContext);
+
     return (
         <>
             <h1>User: {username}</h1>
@@ -243,14 +247,16 @@ export const User = ({ username }) => {
     );
 };
 
+const UserContext = React.createContext(null);
+
 export const ContextComponent = () => {
     const [username, setUsername] = React.useState("");
 
     return (
-        <div>
-            <Login setUsername={setUsername} />
-            <User username={username} />
-        </div>
+        <UserContext.Provider value={{ username, setUsername }}>
+            <Login />
+            <User />
+        </UserContext.Provider>
     );
 };
 
