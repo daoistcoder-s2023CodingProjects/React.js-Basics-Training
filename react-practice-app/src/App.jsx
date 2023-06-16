@@ -174,7 +174,7 @@ export const ButtonChild = React.forwardRef((props, ref) => {
 
     React.useImperativeHandle(ref, () => ({
         alterToggle() {
-            setToggle(!toggle);      
+            setToggle(!toggle);
         },
     }));
     return (
@@ -212,6 +212,40 @@ export const ImperativeHandle = () => {
     );
 };
 
+//ContextComponent Child
+export const Login = (setUsername) => {
+    
+    
+    return (
+        <>
+            <input type="text" onChange={() => {
+                setUsername
+            }} placeholder="Type anything here..." />
+        </>
+    );
+};
+
+export const User = () => {
+    const usernameRef = React.useRef(null);
+
+    return (
+        <>
+            <h1 ref={usernameRef}>User:</h1>
+        </>
+    );
+};
+
+export const ContextComponent = () => {
+    const [username, setUsername] = React.useState("");
+
+    return (
+        <div>
+            <Login setUsername={setUsername} />
+            <User username={username} />
+        </div>
+    );
+};
+
 export default function App() {
     return (
         <div
@@ -225,7 +259,7 @@ export default function App() {
                 textAlign: "center",
             }}
         >
-            <ImperativeHandle />
+            <ContextComponent />
         </div>
     );
 }
