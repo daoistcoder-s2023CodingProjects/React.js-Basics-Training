@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { Children, useEffect } from "react";
 import "./App.css";
 
 import axios from "axios";
@@ -247,16 +247,27 @@ export const User = () => {
     );
 };
 
-const UserContext = React.createContext(null);
+export const UserContext = React.createContext({
+    username: null,
+    setUsername: () => {},
+});
 
-export const ContextComponent = () => {
+export const ContextProvider = ({ children }) => {
     const [username, setUsername] = React.useState("");
 
     return (
         <UserContext.Provider value={{ username, setUsername }}>
+            {children}
+        </UserContext.Provider>
+    );
+};
+
+export const ContextComponent = () => {
+    return (
+        <ContextProvider>
             <Login />
             <User />
-        </UserContext.Provider>
+        </ContextProvider>
     );
 };
 
