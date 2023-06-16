@@ -213,24 +213,32 @@ export const ImperativeHandle = () => {
 };
 
 //ContextComponent Child
-export const Login = (setUsername) => {
-    
-    
+export const Login = ({ setUsername }) => {
     return (
         <>
-            <input type="text" onChange={() => {
-                setUsername
-            }} placeholder="Type anything here..." />
+            <input
+                style={{
+                    lineHeight: "42px",
+                    borderRadius: "10px",
+                    marginRight: "0.5rem",
+                    width: "250px",
+                }}
+                type="text"
+                onChange={(event) => {
+                    const newText = event.target.value;
+                    setUsername(newText);
+                    console.log(newText);
+                }}
+                placeholder="Type anything here..."
+            />
         </>
     );
 };
 
-export const User = () => {
-    const usernameRef = React.useRef(null);
-
+export const User = ({ username }) => {
     return (
         <>
-            <h1 ref={usernameRef}>User:</h1>
+            <h1>User: {username}</h1>
         </>
     );
 };
