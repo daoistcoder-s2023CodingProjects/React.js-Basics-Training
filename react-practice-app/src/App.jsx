@@ -246,11 +246,8 @@ export const User = () => {
         </>
     );
 };
-
-export const UserContext = React.createContext({
-    username: null,
-    setUsername: () => {},
-});
+// ContextProvider comp
+export const UserContext = React.createContext();
 
 export const ContextProvider = ({ children }) => {
     const [username, setUsername] = React.useState("");
@@ -261,7 +258,7 @@ export const ContextProvider = ({ children }) => {
         </UserContext.Provider>
     );
 };
-
+// end of ContextProvider comp
 export const ContextComponent = () => {
     return (
         <ContextProvider>
